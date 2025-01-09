@@ -40,6 +40,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public List<Purchase> getPurchaseHistoryByUserId(Integer userId) {
-        return List.of();
+        return purchaseRepository.findByCustomerId(userId);
     }
 }

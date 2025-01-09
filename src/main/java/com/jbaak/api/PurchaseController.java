@@ -6,10 +6,9 @@ import com.jbaak.service.PurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/purchases")
@@ -22,5 +21,11 @@ public class PurchaseController {
     public ResponseEntity<Purchase> createPurchase(@RequestBody Purchase purchase) {
         Purchase savedPurchase = purchaseService.createPurchase(purchase);
         return new ResponseEntity<>(savedPurchase, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Purchase>> getPurchaseHistoryByUserId(@PathVariable Integer userId) {
+        List<Purchase> purchaseHistory = purchaseService.getPurchaseHistoryByUserId(userId);
+        return ResponseEntity.ok(purchaseHistory);
     }
 }

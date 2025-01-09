@@ -1,5 +1,6 @@
 package com.jbaak.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -29,6 +30,7 @@ public class Collection {
             foreignKey = @ForeignKey (name= "FK_collection_users"))
     private User customer;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL)
     private List<CollectionBook> collectionBooks;
 }
